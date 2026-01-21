@@ -1,8 +1,9 @@
 {
-    "name": "Input",
+    "name": "Input.Implmentation",
     "rootNamespace": "",
     "references": [
-        "GUID:38d1c1a2f634942f28a60c4c8b24a6eb"
+        "GUID:38d1c1a2f634942f28a60c4c8b24a6eb",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
