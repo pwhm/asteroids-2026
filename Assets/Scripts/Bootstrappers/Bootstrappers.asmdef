@@ -1,0 +1,16 @@
+{
+    "name": "Bootstrappers",
+    "rootNamespace": "",
+    "references": [
+        "GUID:38d1c1a2f634942f28a60c4c8b24a6eb"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
