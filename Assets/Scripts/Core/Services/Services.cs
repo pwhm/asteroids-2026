@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Core.Services
 {
-    internal static class Services
+    public static class Services
     {
         private static Dictionary<Type, IService> _services = new();
         private static List<Type> _sceneServices = new();
+        
+        public static bool IsStartingCold => _services.Count == 0;
         
         public static void AddService<T>(T service, ServiceScope scope) where T : IService
         {
