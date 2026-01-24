@@ -1,0 +1,17 @@
+{
+    "name": "Wrappables.Implementation",
+    "rootNamespace": "",
+    "references": [
+        "GUID:b8da7a9d3c104d57a87c02b3c1fca9af",
+        "GUID:38d1c1a2f634942f28a60c4c8b24a6eb"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

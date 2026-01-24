@@ -5,14 +5,14 @@ namespace Modules.Wrappables
     public struct WrappableState
     {
         public readonly bool IsWrapping;
-        public readonly bool ShouldTransition;
-        public readonly Vector3 Position;
+        public readonly bool WrapComplete;
+        public readonly Vector3 WrappedPosition;
 
-        public WrappableState(Vector3 position, bool isWrapping, bool shouldTransition)
+        public WrappableState(Vector3 wrappedPosition, bool isWrapping, bool wrapComplete)
         {
-            Position = position;
+            WrappedPosition = wrappedPosition;
             IsWrapping = isWrapping;
-            ShouldTransition = shouldTransition;
+            WrapComplete = wrapComplete;
         }
     }
 }
