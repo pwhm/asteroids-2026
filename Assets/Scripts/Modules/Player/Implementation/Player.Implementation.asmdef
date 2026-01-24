@@ -1,7 +1,9 @@
 {
-    "name": "Common",
+    "name": "Player.Implementation",
     "rootNamespace": "",
     "references": [
+        "GUID:b67d572711b941348fe86b7be3c423cc",
+        "GUID:6e62cba39222407ba47cf835fdfc2b71",
         "GUID:75469ad4d38634e559750d17036d5f7c"
     ],
     "includePlatforms": [],
