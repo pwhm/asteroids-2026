@@ -8,10 +8,14 @@ namespace Modules.Player.Implementation
     internal sealed class PlayerService : MonoBehaviour, IPlayerService
     {
         [SerializeField] private PlayerController _playerPrefab;
+        [SerializeField] private ProjectileController _projectilePrefab;
         
         private PlayerController _playerInstance;
+
+        private InputSystem_Actions _inputActions;
         
-        private PlayerInputHandler _inputHandler;
+        private PlayerMovementHandler _movementHandler;
+        private ProjectileHandler _projectileHandler;
 
         private void Update()
         {
@@ -20,30 +24,36 @@ namespace Modules.Player.Implementation
                 return;
             }
             
-            _inputHandler.Update();
+            _movementHandler.Update();
+            _projectileHandler.Update();
         }
 
         public Task InitializeAsync()
         {
-            _inputHandler = new PlayerInputHandler();
+            _inputActions = new InputSystem_Actions();
+            
+            _movementHandler = new PlayerMovementHandler(_inputActions);
+            _projectileHandler = new ProjectileHandler(_inputActions, _projectilePrefab);
             
             return Task.CompletedTask;
         }
 
         public void StartRound()
         {
-            _inputHandler.EnableInput();
+            _movementHandler.EnableInput();
         }
         
         public void SetupForNewRound()
         {
             _playerInstance = Instantiate(_playerPrefab);
-            _inputHandler.Initialize(_playerInstance);
+            
+            _movementHandler.Initialize(_playerInstance);
+            _projectileHandler.Initialize(_playerInstance.transform);
         }
 
         public void FinishRound()
         {
-            _inputHandler.DisableInput();
+            _movementHandler.DisableInput();
         }
     }
 }

@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Player.Implementation::Modules.Player.Implementation.PlayerService
   _playerPrefab: {fileID: 4845711698947212074, guid: a1e3aa7643b754ec4851adb800ee8dab, type: 3}
+  _projectilePrefab: {fileID: -5112611852354263797, guid: b87ddadec48184271976834ed4d1f847, type: 3}

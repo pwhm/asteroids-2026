@@ -20,6 +20,21 @@ namespace Core
             Bottom = bottom;
             Size = size;
         }
+
+        public bool IsWithinBounds(Vector3 position)
+        {
+            if (position.x < Left || position.x > Right)
+            {
+                return false;
+            }
+            
+            if (position.y > Top || position.y < Bottom)
+            {
+                return false;
+            }
+            
+            return true;
+        }
     }
     
     public static class ScreenHelper
