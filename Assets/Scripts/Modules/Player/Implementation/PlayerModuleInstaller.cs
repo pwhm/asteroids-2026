@@ -7,13 +7,13 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using Object = UnityEngine.Object;
 
-namespace Modules.Wrappables.Implementation
+namespace Modules.Player.Implementation
 {
-    public static class WrappablesModuleInstaller
+    public static class PlayerModuleInstaller
     {
         public static async Task InstallAsync()
         {
-            var key = string.Format(Constants.AddressablesFormats.SERVICE, "wrappables");
+            var key = string.Format(Constants.AddressablesFormats.SERVICE, "player");
             var handle = Addressables.LoadAssetAsync<GameObject>(key);
             
             await handle.Task;
@@ -23,13 +23,13 @@ namespace Modules.Wrappables.Implementation
                 throw new Exception(handle.OperationException.Message);
             }
             
-            var service = Object.Instantiate(handle.Result).GetComponent<IWrappablesService>();
-            Services.AddService<IWrappablesService>(service, ServiceScope.Scene);
+            var service = Object.Instantiate(handle.Result).GetComponent<IPlayerService>();
+            Services.AddService<IPlayerService>(service, ServiceScope.Scene);
         }
 
-        public static async Task InitializeAsync()
+        public static async Task Initialize()
         {
-            await Services.GetService<IWrappablesService>().InitializeAsync();
+            await Services.GetService<IPlayerService>().InitializeAsync();
         }
     }
 }

@@ -1,8 +1,9 @@
+using Core.Services;
+
 namespace Modules.Player
 {
-    public interface IPlayerService
+    public interface IPlayerService : IService
     {
-        public void Initialize();
         void SetupForNewRound();
         void StartRound();
         void FinishRound();

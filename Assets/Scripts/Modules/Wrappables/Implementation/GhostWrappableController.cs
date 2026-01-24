@@ -3,13 +3,12 @@ using UnityEngine;
 
 namespace Modules.Wrappables.Implementation
 {
-    public class GhostWrappableController : MonoBehaviour, IWrappable
+    internal sealed class GhostWrappableController : MonoBehaviour, IWrappable
     {
         public Vector3 Position => transform.position;
         public Vector2 Size => _collider.bounds.size;
         public WrappableState CurrentState { get; private set; }
 
-        [field:SerializeField] private GameObject _ghost;
         [field: SerializeField] private Collider2D _collider;
 
         private void OnEnable()
@@ -26,14 +25,7 @@ namespace Modules.Wrappables.Implementation
         {
             CurrentState = state;
             
-            _ghost.SetActive(state.IsWrapping);
-
             // Probably better to do this with enum and a switch?
-            if (state.IsWrapping)
-            {
-                _ghost.transform.position = state.WrappedPosition;
-            }
-
             if (state.WrapComplete)
             {
                 transform.position = state.WrappedPosition;

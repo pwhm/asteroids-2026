@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Modules.Common;
 using Modules.Player.Implementation.Handlers;
 using UnityEngine;
@@ -7,16 +8,11 @@ namespace Modules.Player.Implementation
     internal sealed class PlayerService : MonoBehaviour, IPlayerService
     {
         [SerializeField] private PlayerController _playerPrefab;
-
-        [SerializeField] private PlayerController _playerInstance;
+        
+        private PlayerController _playerInstance;
         
         private PlayerInputHandler _inputHandler;
 
-        private void OnEnable()
-        {
-            Initialize();
-        }
-        
         private void Update()
         {
             if (_playerInstance == null)
@@ -27,10 +23,11 @@ namespace Modules.Player.Implementation
             _inputHandler.Update();
         }
 
-        public void Initialize()
+        public Task InitializeAsync()
         {
             _inputHandler = new PlayerInputHandler();
-            _inputHandler.Initialize(_playerInstance);
+            
+            return Task.CompletedTask;
         }
 
         public void StartRound()
@@ -40,7 +37,8 @@ namespace Modules.Player.Implementation
         
         public void SetupForNewRound()
         {
-            _playerInstance = Instantiate(_playerPrefab, transform);
+            _playerInstance = Instantiate(_playerPrefab);
+            _inputHandler.Initialize(_playerInstance);
         }
 
         public void FinishRound()
@@ -48,6 +46,4 @@ namespace Modules.Player.Implementation
             _inputHandler.DisableInput();
         }
     }
-
-
 }

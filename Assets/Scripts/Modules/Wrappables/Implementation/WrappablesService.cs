@@ -68,7 +68,7 @@ namespace Modules.Wrappables.Implementation
             var size = wrappable.Size;
             var halfHeight = size.y * 0.5f;
 
-            return position.y < _bounds.Bottom + halfHeight || position.x > _bounds.Top - halfHeight;
+            return position.y < _bounds.Bottom + halfHeight || position.y > _bounds.Top - halfHeight;
         }
 
         private WrappableState CalculateCurrentWrappableState(
@@ -87,46 +87,37 @@ namespace Modules.Wrappables.Implementation
             var completedVerticalTransition = false;
             if (isTransitioningVertical)
             {
-                var foo = Math.Abs(position.y - halfWidth- _bounds.Left);
-                if (foo > _bounds.Size.x + halfWidth)
+                if (position.y - halfHeight > _bounds.Top)
                 {
-                    if (position.x > 0)
-                    {
-                        // RightSide
-                        completedVerticalTransition = true;
-                        ghostPosition.x -= _bounds.Size.x;
-                    }
+                    // RightSide
+                    completedVerticalTransition = true;
+                    ghostPosition.y -= _bounds.Size.y;
+                }
 
-                    if (position.x < 0)
-                    {
-                        // LeftSide
-                        completedVerticalTransition = true;
-                        ghostPosition.x -= _bounds.Size.x;
-                    }
+                if (position.y + halfHeight < _bounds.Bottom)
+                {
+                    completedVerticalTransition = true;
+                    ghostPosition.y += _bounds.Size.y;
                 }
             }
             var completedHorizontalTransition = false;
             if (isTransitioningHorizontal)
             {
-                var foo = Math.Abs(position.y - halfHeight - _bounds.Top);
-                if (foo > _bounds.Size.y + halfHeight)
+                if (position.x - halfHeight > _bounds.Right)
                 {
-                    if (position.y > 0)
-                    {
-                        // RightSide
-                        completedHorizontalTransition = true;
-                        ghostPosition.y -= _bounds.Size.y;
-                    }
+                    // RightSide
+                    completedHorizontalTransition = true;
+                    ghostPosition.x -= _bounds.Size.x;
+                }
 
-                    if (position.y < 0)
-                    {
-                        // LeftSide
-                        completedHorizontalTransition = true;
-                        ghostPosition.y -= _bounds.Size.y;
-                    }
+                if (position.x + halfHeight < _bounds.Left)
+                {
+                    // LeftSide
+                    completedHorizontalTransition = true;
+                    ghostPosition.x += _bounds.Size.x;
                 }
             }
-            
+
             return new WrappableState(
                 ghostPosition,
                 isTransitioningHorizontal || isTransitioningVertical,

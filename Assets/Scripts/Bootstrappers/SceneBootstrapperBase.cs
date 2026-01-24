@@ -6,31 +6,27 @@ namespace Bootstrappers
 {
     internal abstract class SceneBootstrapperBase : MonoBehaviour
     {
-        private bool _coldStart;
-        
-        private void Awake()
+        private async void Awake()
         {
+            var coldStart = false;
             if (Services.IsStartingCold)
             {
                 Debug.Log($"#Bootstrapper# {GetType().Name} detected cold start");
                 
-                _coldStart = true;
+                coldStart = true;
                 GlobalBootstrapper.AddGlobalServices();
             }
                 
-            AddSceneServices();
-        }
-
-        private void Start()
-        {
-            if (_coldStart)
+            await AddSceneServices();
+            
+            if (coldStart)
             {
                 GlobalBootstrapper.InitializeGlobalServices();
             }
             
-            InitializeScene();
+            await InitializeScene();
         }
-
+        
         protected abstract Task AddSceneServices();
         protected abstract Task InitializeScene();
     }

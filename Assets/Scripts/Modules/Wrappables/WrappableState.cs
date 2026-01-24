@@ -4,6 +4,8 @@ namespace Modules.Wrappables
 {
     public struct WrappableState
     {
+        // Left over from trying to be fancy and doing smooth transition, maybe will have time to do
+        // it properly
         public readonly bool IsWrapping;
         public readonly bool WrapComplete;
         public readonly Vector3 WrappedPosition;
