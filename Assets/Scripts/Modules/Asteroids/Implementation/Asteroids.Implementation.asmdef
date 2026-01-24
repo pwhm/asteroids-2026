@@ -1,0 +1,17 @@
+{
+    "name": "Asteroids.Implementation",
+    "rootNamespace": "",
+    "references": [
+        "GUID:5dbcf6d6cec745458fb8cdf24658d4a4",
+        "GUID:5dbcf6d6cec745458fb8cdf24658d4a4"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
