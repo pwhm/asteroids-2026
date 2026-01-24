@@ -4,13 +4,23 @@ using UnityEngine.InputSystem;
 
 namespace Modules.Player.Implementation.Handlers
 {
-    internal sealed class PlayerInputHandler
+    internal sealed class PlayerMovementHandler
     {
-        private readonly InputSystem_Actions _inputActions = new();
+        private InputSystem_Actions _inputActions;
         private PlayerController _player;
 
+        public PlayerMovementHandler(InputSystem_Actions inputActions)
+        {
+            _inputActions = inputActions;
+        }
+        
         public void Update()
         {
+            if (_inputActions == null)
+            {
+                return;
+            }
+            
             if (_inputActions.Player_1.Thrust.IsPressed())
             {
                 _player.AddThrust();

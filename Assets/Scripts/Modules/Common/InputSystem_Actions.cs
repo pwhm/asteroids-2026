@@ -111,6 +111,15 @@ namespace Modules.Common
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""a303ee42-699b-49bd-bb43-bfa55b452454"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -190,6 +199,17 @@ namespace Modules.Common
                     ""action"": ""Rotation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f9a9b99c-0262-4555-b8f6-42d1d2d734c4"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -289,6 +309,7 @@ namespace Modules.Common
             m_Player_1 = asset.FindActionMap("Player_1", throwIfNotFound: true);
             m_Player_1_Thrust = m_Player_1.FindAction("Thrust", throwIfNotFound: true);
             m_Player_1_Rotation = m_Player_1.FindAction("Rotation", throwIfNotFound: true);
+            m_Player_1_Fire = m_Player_1.FindAction("Fire", throwIfNotFound: true);
             // MainMenu
             m_MainMenu = asset.FindActionMap("MainMenu", throwIfNotFound: true);
             m_MainMenu_Continue = m_MainMenu.FindAction("Continue", throwIfNotFound: true);
@@ -375,6 +396,7 @@ namespace Modules.Common
         private List<IPlayer_1Actions> m_Player_1ActionsCallbackInterfaces = new List<IPlayer_1Actions>();
         private readonly InputAction m_Player_1_Thrust;
         private readonly InputAction m_Player_1_Rotation;
+        private readonly InputAction m_Player_1_Fire;
         /// <summary>
         /// Provides access to input actions defined in input action map "Player_1".
         /// </summary>
@@ -394,6 +416,10 @@ namespace Modules.Common
             /// Provides access to the underlying input action "Player_1/Rotation".
             /// </summary>
             public InputAction @Rotation => m_Wrapper.m_Player_1_Rotation;
+            /// <summary>
+            /// Provides access to the underlying input action "Player_1/Fire".
+            /// </summary>
+            public InputAction @Fire => m_Wrapper.m_Player_1_Fire;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -426,6 +452,9 @@ namespace Modules.Common
                 @Rotation.started += instance.OnRotation;
                 @Rotation.performed += instance.OnRotation;
                 @Rotation.canceled += instance.OnRotation;
+                @Fire.started += instance.OnFire;
+                @Fire.performed += instance.OnFire;
+                @Fire.canceled += instance.OnFire;
             }
 
             /// <summary>
@@ -443,6 +472,9 @@ namespace Modules.Common
                 @Rotation.started -= instance.OnRotation;
                 @Rotation.performed -= instance.OnRotation;
                 @Rotation.canceled -= instance.OnRotation;
+                @Fire.started -= instance.OnFire;
+                @Fire.performed -= instance.OnFire;
+                @Fire.canceled -= instance.OnFire;
             }
 
             /// <summary>
@@ -658,6 +690,13 @@ namespace Modules.Common
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnRotation(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Fire" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnFire(InputAction.CallbackContext context);
         }
         /// <summary>
         /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "MainMenu" which allows adding and removing callbacks.
