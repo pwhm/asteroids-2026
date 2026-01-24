@@ -1,16 +1,18 @@
 using System.Threading.Tasks;
-using Core.Services;
+using Modules.Wrappables.Implementation;
 
 namespace Bootstrappers
 {
     internal sealed class GameplaySceneBootstrapper : SceneBootstrapperBase
     {
-        protected override void AddSceneServices()
+        protected override async Task AddSceneServices()
         {
+            await WrappablesModuleInstaller.InstallAsync();
         }
 
-        protected override void InitializeScene()
+        protected override async Task InitializeScene()
         {
+            await WrappablesModuleInstaller.Initialize();
         }
     }
 }

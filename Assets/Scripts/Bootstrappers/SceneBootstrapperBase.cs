@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Core.Services;
 using UnityEngine;
 
@@ -30,7 +31,7 @@ namespace Bootstrappers
             InitializeScene();
         }
 
-        protected abstract void AddSceneServices();
-        protected abstract void InitializeScene();
+        protected abstract Task AddSceneServices();
+        protected abstract Task InitializeScene();
     }
 }
