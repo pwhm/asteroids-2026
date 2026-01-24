@@ -2,7 +2,10 @@
     "name": "Bootstrappers",
     "rootNamespace": "",
     "references": [
-        "GUID:38d1c1a2f634942f28a60c4c8b24a6eb"
+        "GUID:38d1c1a2f634942f28a60c4c8b24a6eb",
+        "GUID:f2888d2aabc2453683457aa093bac036",
+        "GUID:d4a64ead032a4253854064db4f89c936",
+        "GUID:b67d572711b941348fe86b7be3c423cc"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

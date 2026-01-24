@@ -17,7 +17,7 @@ namespace Modules.Player.Implementation
 
         public void Rotate(float direction)
         {
-            _rigidbody.angularVelocity = _rotationSpeed * direction;
+            _rigidbody.MoveRotation(_rigidbody.rotation + (_rotationSpeed * direction)*Time.deltaTime);
         }
     }
 }
