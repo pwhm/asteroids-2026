@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Services;
 using Modules.Assets;
@@ -20,6 +21,8 @@ namespace Modules.Asteroids.Implementation.Handlers
         private ObjectPool<AsteroidController> _largeAsteroidPool;
         private ObjectPool<AsteroidController> _mediumAsteroidPool;
         private ObjectPool<AsteroidController> _smallAsteroidPool;
+        
+        private List<AsteroidController> _activeAsteroids;
         
         public AsteroidsSpawner(IAsteroidsServiceContext context)
         {
@@ -53,17 +56,22 @@ namespace Modules.Asteroids.Implementation.Handlers
 
         public AsteroidController GetAsteroidInstanceOfType(AsteroidType type)
         {
-                return type switch
+                var asteroid = type switch
                 {
                     AsteroidType.Large => _largeAsteroidPool.Get(),
                     AsteroidType.Medium => _mediumAsteroidPool.Get(),
                     AsteroidType.Small => _smallAsteroidPool.Get(),
                     _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
                 };
+                
+                _activeAsteroids.Add(asteroid);
+                
+                return asteroid;
         }
 
         public void ReleaseAsteroid(AsteroidController asteroid)
         {
+            _activeAsteroids.Remove(asteroid);
             switch (asteroid.Type)
             {
                 case AsteroidType.Large:
@@ -77,6 +85,11 @@ namespace Modules.Asteroids.Implementation.Handlers
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(asteroid.Type), asteroid.Type, null);
+            }
+
+            if (_activeAsteroids.Count == 0)
+            {
+                Events.Gameplay.AsteroidDestroyed?.Invoke();
             }
         }
         

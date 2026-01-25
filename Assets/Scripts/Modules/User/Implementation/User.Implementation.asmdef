@@ -1,0 +1,18 @@
+{
+    "name": "Progression.Implementation",
+    "rootNamespace": "",
+    "references": [
+        "GUID:38d1c1a2f634942f28a60c4c8b24a6eb",
+        "GUID:6e62cba39222407ba47cf835fdfc2b71",
+        "GUID:6e9b40f1110b43f58f52b10b9f56a0fe"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

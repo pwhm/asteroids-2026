@@ -7,7 +7,7 @@ namespace Modules.Gameplay
         /// <summary>
         /// Loads gameplay scene and starts the session
         /// </summary>
-        public void StartNewGame();
+        public void SwitchTo();
         public void StartRound();
     }
 }

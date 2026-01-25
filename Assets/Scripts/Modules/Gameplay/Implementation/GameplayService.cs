@@ -15,7 +15,7 @@ namespace Modules.Gameplay.Implementation
             return Task.CompletedTask;
         }
         
-        public void StartNewGame()
+        public void SwitchTo()
         {
         }
 
