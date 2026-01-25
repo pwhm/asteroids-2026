@@ -27,7 +27,7 @@ namespace Modules.Player.Implementation.Handlers
             
             _projectilePool = new ObjectPool<ProjectileController>(
                 CreateProjectile, 
-                (element) => element.gameObject.SetActive(true),
+                OnProjectileGet,
                 OnProjectileReleased);
             _screenBounds = ScreenHelper.GetScreenBounds(Camera.main);
         }
@@ -82,6 +82,7 @@ namespace Modules.Player.Implementation.Handlers
             var projectile = _projectilePool.Get();
             
              projectile.Initialize(playerDirection, playerPosition);
+             
              _activeProjectiles.Add(projectile);
         }
 
@@ -92,10 +93,22 @@ namespace Modules.Player.Implementation.Handlers
             return instance;
         }
 
+        private void OnProjectileGet(ProjectileController projectile)
+        {
+            projectile.gameObject.SetActive(true);
+             projectile.Collided += OnProjectileCollided;
+        }
+
         private void OnProjectileReleased(ProjectileController projectile)
         {
             projectile.gameObject.SetActive(false);
+            projectile.Collided -= OnProjectileCollided;
             _activeProjectiles.Remove(projectile);
+        }
+
+        private void OnProjectileCollided(ProjectileController projectile)
+        {
+            _projectilePool.Release(projectile);
         }
     }
 }

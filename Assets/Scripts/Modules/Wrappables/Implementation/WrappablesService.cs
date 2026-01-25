@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Modules.Wrappables.Implementation
 {
-    internal sealed class WrappablesService : MonoBehaviour, IWrappablesService
+    internal sealed class WrappablesService : MonoBehaviour, IWrappablesService, IDisposable
     {
         private ScreenBounds _bounds;
         private List<IWrappable> _wrappables = new();
@@ -17,6 +17,15 @@ namespace Modules.Wrappables.Implementation
             {
                 ProcessWrappable(wrappable);
             }
+        }
+        
+        public void Dispose()
+        {
+            foreach (var wrappable in _wrappables)
+            {
+                wrappable.Disable();
+            }
+            _wrappables.Clear();
         }
 
         public Task InitializeAsync()

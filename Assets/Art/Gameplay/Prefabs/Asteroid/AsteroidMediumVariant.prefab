@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: rotationSpeed
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: -8902146018952914654, guid: d61a05c13ff9e43a0b5dc5cbcbcec6b0, type: 3}
+      propertyPath: <Type>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2583985242709511209, guid: d61a05c13ff9e43a0b5dc5cbcbcec6b0, type: 3}
       propertyPath: m_Name
       value: AsteroidMediumVariant

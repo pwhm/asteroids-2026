@@ -6,6 +6,7 @@ namespace Modules.Player.Implementation
 {
     public class PlayerController : MonoBehaviour
     {
+        public event Action<PlayerController> Collided;
         [SerializeField] private Rigidbody2D _rigidbody;
         [SerializeField] private float _thrustForce = 10.0f;
         [SerializeField] private float _rotationSpeed = 10.0f;
@@ -18,6 +19,11 @@ namespace Modules.Player.Implementation
         public void Rotate(float direction)
         {
             _rigidbody.MoveRotation(_rigidbody.rotation + (_rotationSpeed * direction)*Time.deltaTime);
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            Collided?.Invoke(this);
         }
     }
 }
