@@ -28,6 +28,11 @@ namespace Core.Services
         {
             foreach (var service in _sceneServices)
             {
+                if (service is IDisposable disposable)
+                {
+                    disposable.Dispose();
+                } 
+                
                 _services.Remove(service);
             }
             

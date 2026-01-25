@@ -28,7 +28,7 @@ namespace Bootstrappers
             Services.GetService<IPlayerService>().SetupForNewRound();
             Services.GetService<IPlayerService>().StartRound();
             
-            Services.GetService<IAsteroidsService>().SetupForNewRound();
+            Services.GetService<IAsteroidsService>().SetupForNewRound(0);
             Services.GetService<IAsteroidsService>().StartRound();
         }
     }

@@ -1,13 +1,15 @@
+using System;
 using System.Collections.Generic;
 using Core;
 using Modules.Common;
 using UnityEngine;
 using UnityEngine.Pool;
+using Object = UnityEngine.Object;
 
 namespace Modules.Player.Implementation.Handlers
 {
     // Sperate module?
-    internal sealed class ProjectileHandler
+    internal sealed class ProjectileHandler : IDisposable
     {
         private InputSystem_Actions _inputActions;
         private Transform _playerTransform;
@@ -28,6 +30,11 @@ namespace Modules.Player.Implementation.Handlers
                 (element) => element.gameObject.SetActive(true),
                 OnProjectileReleased);
             _screenBounds = ScreenHelper.GetScreenBounds(Camera.main);
+        }
+
+        public void Dispose()
+        {
+            _projectilePool?.Dispose();
         }
 
         public void Update()
