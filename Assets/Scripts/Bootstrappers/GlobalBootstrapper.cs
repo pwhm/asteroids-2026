@@ -1,10 +1,13 @@
+using System.Threading.Tasks;
+using Modules.Assets.Implementation;
+
 namespace Bootstrappers
 {
     internal static class GlobalBootstrapper
     {
-        public static void AddGlobalServices()
+        public static async Task AddGlobalServices()
         {
-            
+            await AssetsModuleInstaller.InstallProjectServicesAsync();
         }
 
         public static void InitializeGlobalServices()
