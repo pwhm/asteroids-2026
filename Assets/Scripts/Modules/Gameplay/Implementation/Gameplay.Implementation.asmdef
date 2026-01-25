@@ -1,0 +1,20 @@
+{
+    "name": "Gameplay.Implementation",
+    "rootNamespace": "",
+    "references": [
+        "GUID:38d1c1a2f634942f28a60c4c8b24a6eb",
+        "GUID:6e62cba39222407ba47cf835fdfc2b71",
+        "GUID:95bd615be5f9411c8eaca0ce2640d10f",
+        "GUID:b67d572711b941348fe86b7be3c423cc",
+        "GUID:5dbcf6d6cec745458fb8cdf24658d4a4"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

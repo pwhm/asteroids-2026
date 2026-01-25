@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Modules.Assets.Implementation;
+using Modules.Gameplay.Implementation;
 using Random = UnityEngine.Random;
 
 namespace Bootstrappers
@@ -10,6 +11,8 @@ namespace Bootstrappers
         public static Task AddGlobalServices()
         {
             AssetsModuleInstaller.InstallProjectServices();
+            GameplayModuleInstaller.InstallProjectServices();
+            
             return Task.CompletedTask;
         }
 

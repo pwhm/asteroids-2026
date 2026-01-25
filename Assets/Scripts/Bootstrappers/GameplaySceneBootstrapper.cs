@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Core.Services;
 using Modules.Asteroids;
 using Modules.Asteroids.Implementation;
+using Modules.Gameplay;
 using Modules.Player;
 using Modules.Player.Implementation;
 using Modules.Wrappables.Implementation;
@@ -25,11 +26,7 @@ namespace Bootstrappers
             
             
             // Move to gameplay service later
-            Services.GetService<IPlayerService>().SetupForNewRound();
-            Services.GetService<IPlayerService>().StartRound();
-            
-            Services.GetService<IAsteroidsService>().SetupForNewRound(0);
-            Services.GetService<IAsteroidsService>().StartRound();
+            Services.GetService<IGameplayService>().StartRound();
         }
     }
 }
