@@ -173,6 +173,7 @@ namespace Modules.Asteroids.Implementation
                 };
                 
                 asteroidInstance.transform.position = spawnPoint.Position;
+                asteroidInstance.Initialize();
             }
         }
     }

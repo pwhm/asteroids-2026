@@ -5,7 +5,7 @@ namespace Modules.Assets.Implementation
 {
     public static class AssetsModuleInstaller
     {
-        public static async Task InstallProjectServicesAsync()
+        public static void InstallProjectServices()
         {
             var assetService = new AssetService();
             
