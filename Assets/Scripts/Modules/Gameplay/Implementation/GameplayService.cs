@@ -22,11 +22,6 @@ namespace Modules.Gameplay.Implementation
             return Task.CompletedTask;
         }
 
-        public void SetUI()
-        {
-            
-        }
-        
         public void SwitchTo()
         {
         }
@@ -48,6 +43,7 @@ namespace Modules.Gameplay.Implementation
             
             _playerService.StartRound();
             _asteroidsService.StartRound();
+            Events.Gameplay.RoundStarted?.Invoke();
         }
 
         private void OnRoundCompleted()
@@ -59,7 +55,7 @@ namespace Modules.Gameplay.Implementation
         private void OnPlayerHit()
         {
             _sessionStateService.Session.DeductLife();
-            
+            Events.Gameplay.PlayerLostLife?.Invoke();
             // Update UI
         }
     }

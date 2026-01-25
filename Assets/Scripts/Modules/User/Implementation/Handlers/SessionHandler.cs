@@ -5,6 +5,7 @@ namespace Modules.User.Implementation.Handlers
         private RoundState _state;
 
         public int RoundNumber => _state.Properties[RoundStateProperty.Round];
+        public int Lives => _state.Properties[RoundStateProperty.Lives];
 
         public void StartNewRound()
         {
