@@ -46,7 +46,7 @@ namespace Modules.Asteroids.Implementation
 
         public void StartRound()
         {
-            // spawn asteroids
+            SpawnAsteroids();
         }
 
         private async Task LoadPrefabs()
@@ -65,10 +65,10 @@ namespace Modules.Asteroids.Implementation
             _largePrefab = await assetService.LoadPrefab<AsteroidController>(key, Constants.Addressables.Tags.GAMEPLAY);
 
             key = string.Format(KEY_FORMAT, nameof(AsteroidType.Medium));
-            _largePrefab = await assetService.LoadPrefab<AsteroidController>(key, Constants.Addressables.Tags.GAMEPLAY);
+            _mediumPrefab= await assetService.LoadPrefab<AsteroidController>(key, Constants.Addressables.Tags.GAMEPLAY);
 
             key = string.Format(KEY_FORMAT, nameof(AsteroidType.Small));
-            _largePrefab = await assetService.LoadPrefab<AsteroidController>(key, Constants.Addressables.Tags.GAMEPLAY);
+            _smallPrefab = await assetService.LoadPrefab<AsteroidController>(key, Constants.Addressables.Tags.GAMEPLAY);
         }
 
         private async Task LoadLayouts()
@@ -92,12 +92,12 @@ namespace Modules.Asteroids.Implementation
                 OnAsteroidGet,
                 OnAsteroidRelease);
             
-            _largeAsteroidPool = new ObjectPool<AsteroidController>(
+            _mediumAsteroidPool= new ObjectPool<AsteroidController>(
                 () => OnAsteroidCreate(AsteroidType.Medium),
                 OnAsteroidGet,
                 OnAsteroidRelease);
             
-            _largeAsteroidPool = new ObjectPool<AsteroidController>(
+            _smallAsteroidPool = new ObjectPool<AsteroidController>(
                 () => OnAsteroidCreate(AsteroidType.Small),
                 OnAsteroidGet,
                 OnAsteroidRelease);
@@ -157,6 +157,23 @@ namespace Modules.Asteroids.Implementation
             }
 
             _activeLayout = layout;
+        }
+
+        private void SpawnAsteroids()
+        {
+            foreach (var spawnPoint in _activeLayout.SpawnPoints)
+            {
+                var type =  spawnPoint.Type;
+                var asteroidInstance = type switch
+                {
+                    AsteroidType.Large => _largeAsteroidPool.Get(),
+                    AsteroidType.Medium => _mediumAsteroidPool.Get(),
+                    AsteroidType.Small => _smallAsteroidPool.Get(),
+                    _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+                };
+                
+                asteroidInstance.transform.position = spawnPoint.Position;
+            }
         }
     }
 }
