@@ -9,5 +9,6 @@ namespace Modules.Wrappables
         public WrappableState CurrentState { get; }
 
         public void UpdateState(WrappableState state);
+        public void Disable();
     }
 }

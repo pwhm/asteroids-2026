@@ -21,6 +21,10 @@ namespace Modules.Wrappables.Implementation
         
         public void Dispose()
         {
+            foreach (var wrappable in _wrappables)
+            {
+                wrappable.Disable();
+            }
             _wrappables.Clear();
         }
 

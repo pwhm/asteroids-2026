@@ -8,6 +8,10 @@ namespace Modules.Asteroids.Implementation
     [RequireComponent(typeof(Rigidbody2D))]
     internal sealed class AsteroidController : MonoBehaviour
     {
+        public event Action<AsteroidController> Collided;
+        
+        [field:SerializeField] public AsteroidType Type { get; private set; }
+        [Space]
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private float speed  = 10;
         [SerializeField] private float rotationSpeed = 3;
@@ -23,9 +27,9 @@ namespace Modules.Asteroids.Implementation
             _rigidbody2D.angularVelocity = Random.Range(-10, 11) / 10.0f * rotationSpeed;
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log($"Asteroid hit {other.gameObject.name}");
+            Collided?.Invoke(this);
         }
     }
 }

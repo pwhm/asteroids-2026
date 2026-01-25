@@ -20,7 +20,12 @@ namespace Modules.Wrappables.Implementation
         {
             Services.GetService<IWrappablesService>().Unregister(this);
         }
-        
+
+        public void Disable()
+        {
+            gameObject.SetActive(false);
+        }
+
         public void UpdateState(WrappableState state)
         {
             CurrentState = state;

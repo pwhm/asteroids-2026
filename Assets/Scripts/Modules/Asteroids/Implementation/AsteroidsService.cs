@@ -122,6 +122,8 @@ namespace Modules.Asteroids.Implementation
         {
             asteroid.gameObject.SetActive(false);
             _activeAsteroids.Remove(asteroid);
+            
+            asteroid.Collided -= OnAsteroidCollided;
         }
 
         private AsteroidController GetAsteroidOfType(AsteroidType asteroidType)
@@ -174,6 +176,30 @@ namespace Modules.Asteroids.Implementation
                 
                 asteroidInstance.transform.position = spawnPoint.Position;
                 asteroidInstance.Initialize();
+                asteroidInstance.Collided += OnAsteroidCollided;
+            }
+        }
+
+        private void OnAsteroidCollided(AsteroidController asteroid)
+        {
+            ReleaseAsteroid(asteroid);
+        }
+
+        private void ReleaseAsteroid(AsteroidController asteroid)
+        {
+            switch (asteroid.Type)
+            {
+                case AsteroidType.Large:
+                    _largeAsteroidPool.Release(asteroid);
+                    break;
+                case AsteroidType.Medium:
+                    _mediumAsteroidPool.Release(asteroid);
+                    break;
+                case AsteroidType.Small:
+                    _smallAsteroidPool.Release(asteroid);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(asteroid.Type), asteroid.Type, null);
             }
         }
     }
