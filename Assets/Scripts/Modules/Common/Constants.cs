@@ -12,5 +12,10 @@ namespace Modules.Common
                 public const string GAMEPLAY = "gameplay";
             }
         }
+
+        public static class Gameplay
+        {
+            public const string PLAYER_TAG = "Player";
+        }
     }
 }

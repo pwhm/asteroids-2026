@@ -8,6 +8,7 @@ namespace Modules.Common
         {
             public static Action AsteroidDestroyed;
             public static Action RoundCompleted;
+            public static Action PlayerHit;
         }
     }
 }

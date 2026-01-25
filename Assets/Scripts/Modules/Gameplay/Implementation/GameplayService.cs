@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Core.Services;
 using Modules.Asteroids;
@@ -17,7 +18,13 @@ namespace Modules.Gameplay.Implementation
         public Task InitializeAsync()
         {
             Events.Gameplay.RoundCompleted +=  OnRoundCompleted;
+            Events.Gameplay.PlayerHit += OnPlayerHit;
             return Task.CompletedTask;
+        }
+
+        public void SetUI()
+        {
+            
         }
         
         public void SwitchTo()
@@ -47,6 +54,13 @@ namespace Modules.Gameplay.Implementation
         {
             _sessionStateService.Session.StartNewRound();
             StartRound();
+        }
+
+        private void OnPlayerHit()
+        {
+            _sessionStateService.Session.DeductLife();
+            
+            // Update UI
         }
     }
 }

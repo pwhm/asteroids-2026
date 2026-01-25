@@ -5,5 +5,6 @@ namespace Modules.User
         public int RoundNumber { get; }
         public void StartNewRound();
         public void AddPoints(int points);
+        public void DeductLife();
     }
 }

@@ -9,14 +9,13 @@ namespace Modules.Asteroids.Implementation.Handlers
         public AsteroidCollisionHandler(IAsteroidsServiceContext context)
         {
             _context = context;
-            _context.AsteroidCollided += ResolveCollision;
         }
 
-        public void ResolveCollision(AsteroidController asteroid)
+        public void ResolveCollision(AsteroidController asteroid, string tag)
         {
             Events.Gameplay.AsteroidDestroyed?.Invoke();
             
-            if (asteroid.Type == AsteroidType.Small)
+            if (asteroid.Type == AsteroidType.Small || tag == Constants.Gameplay.PLAYER_TAG)
             {
                 _context.Spawner.ReleaseAsteroid(asteroid);
                 return;

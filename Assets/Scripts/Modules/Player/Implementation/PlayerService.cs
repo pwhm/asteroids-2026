@@ -41,6 +41,7 @@ namespace Modules.Player.Implementation
             _movementHandler = new PlayerMovementHandler(_inputActions);
             _projectileHandler = new ProjectileHandler(_inputActions, _projectilePrefab);
             _playerInstance = Instantiate(_playerPrefab);
+            _playerInstance.Collided += OnPlayerCollision;
 
             return Task.CompletedTask;
         }
@@ -60,6 +61,12 @@ namespace Modules.Player.Implementation
         public void FinishRound()
         {
             _movementHandler.DisableInput();
+        }
+
+        // Due to how collision matrix is set up we can safely assume that we collided with asteroid
+        private void OnPlayerCollision(PlayerController _)
+        {
+            Events.Gameplay.PlayerHit?.Invoke();
         }
     }
 }

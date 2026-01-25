@@ -14,7 +14,7 @@ namespace Modules.Asteroids.Implementation
     internal sealed class AsteroidsService : IAsteroidsService, IDisposable, IAsteroidsServiceContext
     {
         public AsteroidLayoutController CurrentLayout { get; set; }
-        public Action<AsteroidController> AsteroidCollided { get; set; }
+        public Action<AsteroidController, string> AsteroidCollided { get; set; }
 
         private AsteroidsLayoutLoader _layoutLoader;
         private AsteroidCollisionHandler _collisionHandler;
