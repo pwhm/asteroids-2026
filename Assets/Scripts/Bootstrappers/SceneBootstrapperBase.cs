@@ -24,7 +24,7 @@ namespace Bootstrappers
             
             if (coldStart)
             {
-                GlobalBootstrapper.InitializeGlobalServices();
+                await GlobalBootstrapper.InitializeGlobalServices();
             }
             
             await InitializeScene();

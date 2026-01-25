@@ -11,10 +11,15 @@ namespace Modules.Asteroids.Implementation
         public event Action<AsteroidController> Collided;
         
         [field:SerializeField] public AsteroidType Type { get; private set; }
+
         [Space]
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private float speed  = 10;
         [SerializeField] private float rotationSpeed = 3;
+
+        public Vector2 DirectionNormalized => _rigidbody2D.linearVelocity.normalized;
+        public Vector3 Position => transform.position;
+        public float Spped =>  _rigidbody2D.linearVelocity.magnitude;
 
         private void Reset()
         {
@@ -24,6 +29,13 @@ namespace Modules.Asteroids.Implementation
         public void Initialize()
         {
             _rigidbody2D.linearVelocity = Vector2Helper.GetRandomNormalized(25) * speed;
+            _rigidbody2D.angularVelocity = Random.Range(-10, 11) / 10.0f * rotationSpeed;
+        }
+
+        public void Initialize(Vector3 position, Vector2 direction)
+        {
+            transform.position = position;
+            _rigidbody2D.linearVelocity = direction * speed;
             _rigidbody2D.angularVelocity = Random.Range(-10, 11) / 10.0f * rotationSpeed;
         }
 

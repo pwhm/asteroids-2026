@@ -18,7 +18,7 @@ namespace Modules.Player.Implementation
 
         public void Rotate(float direction)
         {
-            _rigidbody.MoveRotation(_rigidbody.rotation + (_rotationSpeed * direction)*Time.deltaTime);
+            _rigidbody.MoveRotation(_rigidbody.rotation + _rotationSpeed * direction);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
