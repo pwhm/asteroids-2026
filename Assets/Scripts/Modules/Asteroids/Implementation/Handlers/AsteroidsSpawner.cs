@@ -39,22 +39,27 @@ namespace Modules.Asteroids.Implementation.Handlers
             _smallAsteroidPool?.Dispose();
         }
 
-        public void SpawnAsteroids()
+        public void SpawnAsteroidWave()
         {
             foreach (var spawnPoint in _context.CurrentLayout.SpawnPoints)
             {
                 var type =  spawnPoint.Type;
-                var asteroidInstance = type switch
+                
+                var asteroidInstance = GetAsteroidInstanceOfType(type);
+                asteroidInstance.transform.position = spawnPoint.Position;
+                asteroidInstance.Initialize();
+            }
+        }
+
+        public AsteroidController GetAsteroidInstanceOfType(AsteroidType type)
+        {
+                return type switch
                 {
                     AsteroidType.Large => _largeAsteroidPool.Get(),
                     AsteroidType.Medium => _mediumAsteroidPool.Get(),
                     AsteroidType.Small => _smallAsteroidPool.Get(),
                     _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
                 };
-                
-                asteroidInstance.transform.position = spawnPoint.Position;
-                asteroidInstance.Initialize();
-            }
         }
 
         public void ReleaseAsteroid(AsteroidController asteroid)
@@ -110,7 +115,7 @@ namespace Modules.Asteroids.Implementation.Handlers
         
         private AsteroidController AsteroidCreate(AsteroidType asteroidType)
         {
-            var prefab = GetAsteroidOfType(asteroidType);
+            var prefab = GetAsteroidPrefabOfType(asteroidType);
             
             var instance = Object.Instantiate(prefab, Vector3.zero, Quaternion.identity);
             
@@ -130,14 +135,14 @@ namespace Modules.Asteroids.Implementation.Handlers
             asteroid.Collided -= _context.AsteroidCollided;
         }
 
-        private AsteroidController GetAsteroidOfType(AsteroidType asteroidType)
+        private AsteroidController GetAsteroidPrefabOfType(AsteroidType type)
         {
-            return asteroidType switch
+            return type switch
             {
                 AsteroidType.Large => _largePrefab,
                 AsteroidType.Medium => _mediumPrefab,
                 AsteroidType.Small => _smallPrefab,
-                _ => throw new ArgumentOutOfRangeException(nameof(asteroidType), asteroidType, null)
+                _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
             };
         }
     }

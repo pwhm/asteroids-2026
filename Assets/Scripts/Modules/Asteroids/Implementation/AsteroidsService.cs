@@ -17,12 +17,16 @@ namespace Modules.Asteroids.Implementation
         public Action<AsteroidController> AsteroidCollided { get; set; }
 
         private AsteroidsLayoutLoader _layoutLoader;
+        private AsteroidCollisionHandler _collisionHandler;
         public AsteroidsSpawner Spawner { get; private set; }
+        public AsteroidSplitHandler Spliter { get; private set; }
         
         public async Task InitializeAsync()
         {
             _layoutLoader = new AsteroidsLayoutLoader(this);
             Spawner = new AsteroidsSpawner(this);
+            _collisionHandler = new AsteroidCollisionHandler(this);
+            Spliter = new AsteroidSplitHandler(this);
 
             await _layoutLoader.InitializeAsync();
             await Spawner.InitializeAsync();
@@ -40,7 +44,7 @@ namespace Modules.Asteroids.Implementation
 
         public void StartRound()
         {
-            Spawner.SpawnAsteroids();
+            Spawner.SpawnAsteroidWave();
         }
     }
 }
