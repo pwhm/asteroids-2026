@@ -1,15 +1,21 @@
+using System;
+using System.Threading.Tasks;
+using Modules.Assets.Implementation;
+using Random = UnityEngine.Random;
+
 namespace Bootstrappers
 {
     internal static class GlobalBootstrapper
     {
-        public static void AddGlobalServices()
+        public static Task AddGlobalServices()
         {
-            
+            AssetsModuleInstaller.InstallProjectServices();
+            return Task.CompletedTask;
         }
 
         public static void InitializeGlobalServices()
         {
-            
+            Random.InitState( (int)DateTime.UnixEpoch.Ticks);
         }
     }
 }

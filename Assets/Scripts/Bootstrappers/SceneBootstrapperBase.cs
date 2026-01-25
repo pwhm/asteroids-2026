@@ -1,5 +1,8 @@
+using System;
 using System.Threading.Tasks;
 using Core.Services;
+using Modules.Assets;
+using Modules.Common;
 using UnityEngine;
 
 namespace Bootstrappers
@@ -14,7 +17,7 @@ namespace Bootstrappers
                 Debug.Log($"#Bootstrapper# {GetType().Name} detected cold start");
                 
                 coldStart = true;
-                GlobalBootstrapper.AddGlobalServices();
+                await GlobalBootstrapper.AddGlobalServices();
             }
                 
             await AddSceneServices();
@@ -26,7 +29,13 @@ namespace Bootstrappers
             
             await InitializeScene();
         }
-        
+
+        private void OnDestroy()
+        {
+            Services.GetService<IAssetService>().ReleaseAssets(Constants.Addressables.Tags.GAMEPLAY);
+            Services.RemoveSceneServices();
+        }
+
         protected abstract Task AddSceneServices();
         protected abstract Task InitializeScene();
     }

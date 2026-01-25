@@ -15,13 +15,38 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 45d05f9e28aee4c7c8f374f92ebd480d
   m_SerializeEntries:
+  - m_GUID: 3d46a842557dc47518ebcdd8655d22e3
+    m_Address: gameplay/asteroids/Small
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4975399998c994ddaab41095c433b1b1
+    m_Address: gameplay/asteroids/layouts/1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 56762cccfe0fd4ebabc4af420fb7be3d
     m_Address: service/wrappables
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 71473a52e5e5d4cd8bd9116bbdec9f7a
+    m_Address: gameplay/asteroids/Medium
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cb291f7c42f524b0eba8807105080e32
     m_Address: service/player
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d61a05c13ff9e43a0b5dc5cbcbcec6b0
+    m_Address: gameplay/asteroids/Large
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fb72e686caa3f4399b23594d90eb8f92
+    m_Address: gameplay/asteroids/layouts/0
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Core.Services;
+using Modules.Assets;
 using Modules.Common;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -9,21 +10,15 @@ using Object = UnityEngine.Object;
 
 namespace Modules.Player.Implementation
 {
-    public static class PlayerModuleInstaller
+    public static class PlayerModuleInstaller 
     {
         public static async Task InstallAsync()
         {
-            var key = string.Format(Constants.AddressablesFormats.SERVICE, "player");
-            var handle = Addressables.LoadAssetAsync<GameObject>(key);
-            
-            await handle.Task;
+            var key = string.Format(Constants.Addressables.SERVICE_KEY_FORMAT, "player");
+            var prefab = await Services.GetService<IAssetService>()
+                .LoadPrefab<PlayerService>(key, Constants.Addressables.Tags.GAMEPLAY);
 
-            if (handle.Status != AsyncOperationStatus.Succeeded)
-            {
-                throw new Exception(handle.OperationException.Message);
-            }
-            
-            var service = Object.Instantiate(handle.Result).GetComponent<IPlayerService>();
+            var service = Object.Instantiate(prefab);
             Services.AddService<IPlayerService>(service, ServiceScope.Scene);
         }
 

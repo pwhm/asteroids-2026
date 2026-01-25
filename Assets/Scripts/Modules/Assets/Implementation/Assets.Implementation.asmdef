@@ -1,0 +1,20 @@
+{
+    "name": "Assets.Implementation",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6e62cba39222407ba47cf835fdfc2b71",
+        "GUID:84651a3751eca9349aac36a66bba901b",
+        "GUID:9e24947de15b9834991c9d8411ea37cf",
+        "GUID:f1081bc3d73140fa912be09fb456a320",
+        "GUID:38d1c1a2f634942f28a60c4c8b24a6eb"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

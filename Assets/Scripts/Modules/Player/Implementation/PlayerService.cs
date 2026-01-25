@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Modules.Common;
 using Modules.Player.Implementation.Handlers;
@@ -5,7 +6,7 @@ using UnityEngine;
 
 namespace Modules.Player.Implementation
 {
-    internal sealed class PlayerService : MonoBehaviour, IPlayerService
+    internal sealed class PlayerService : MonoBehaviour, IPlayerService, IDisposable
     {
         [SerializeField] private PlayerController _playerPrefab;
         [SerializeField] private ProjectileController _projectilePrefab;
@@ -26,6 +27,11 @@ namespace Modules.Player.Implementation
             
             _movementHandler.Update();
             _projectileHandler.Update();
+        }
+
+        public void Dispose()
+        {
+            _projectileHandler.Dispose();
         }
 
         public Task InitializeAsync()
