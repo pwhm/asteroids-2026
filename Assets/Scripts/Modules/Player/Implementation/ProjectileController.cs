@@ -19,5 +19,10 @@ namespace Modules.Player.Implementation
             _rigidbody.linearVelocity = direction * _speed;
             transform.position = position + direction.normalized * 0.1f;
         }
+        
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            Debug.Log($"Projectile hit {other.gameObject.name}");
+        }
     }
 }

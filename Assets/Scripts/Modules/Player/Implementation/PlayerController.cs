@@ -19,5 +19,10 @@ namespace Modules.Player.Implementation
         {
             _rigidbody.MoveRotation(_rigidbody.rotation + (_rotationSpeed * direction)*Time.deltaTime);
         }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            Debug.Log($"Player hit {other.gameObject.name}");
+        }
     }
 }

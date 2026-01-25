@@ -22,5 +22,10 @@ namespace Modules.Asteroids.Implementation
             _rigidbody2D.linearVelocity = Vector2Helper.GetRandomNormalized(25) * speed;
             _rigidbody2D.angularVelocity = Random.Range(-10, 11) / 10.0f * rotationSpeed;
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            Debug.Log($"Asteroid hit {other.gameObject.name}");
+        }
     }
 }
