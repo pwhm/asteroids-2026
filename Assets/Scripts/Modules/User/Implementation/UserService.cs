@@ -1,13 +1,23 @@
 using System.Threading.Tasks;
-using Modules.Progression;
+using Modules.User.Implementation.Handlers;
 
 namespace Modules.User.Implementation
 {
-    internal sealed class ProgressionService : IProgressionService
+    internal sealed class UserService : IUserService
     {
+        public ISessionHandler Session => _sessionHandler;
+        
+        private SessionHandler _sessionHandler;
+        
         public Task InitializeAsync()
         {
-            throw new System.NotImplementedException();
+            _sessionHandler = new SessionHandler();
+            return Task.CompletedTask;
+        }
+
+        public void StartNewSession()
+        {
+            _sessionHandler.StartNewSession();
         }
     }
 }

@@ -40,19 +40,19 @@ namespace Modules.Player.Implementation
             
             _movementHandler = new PlayerMovementHandler(_inputActions);
             _projectileHandler = new ProjectileHandler(_inputActions, _projectilePrefab);
-            
+            _playerInstance = Instantiate(_playerPrefab);
+
             return Task.CompletedTask;
         }
 
         public void StartRound()
         {
             _movementHandler.EnableInput();
+            _playerInstance.transform.position = Vector3.zero;
         }
         
         public void SetupForNewRound()
         {
-            _playerInstance = Instantiate(_playerPrefab);
-            
             _movementHandler.Initialize(_playerInstance);
             _projectileHandler.Initialize(_playerInstance.transform);
         }

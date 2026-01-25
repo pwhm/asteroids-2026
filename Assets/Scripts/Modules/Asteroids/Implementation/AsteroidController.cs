@@ -16,7 +16,7 @@ namespace Modules.Asteroids.Implementation
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private float speed  = 10;
         [SerializeField] private float rotationSpeed = 3;
-        
+
         public Vector2 DirectionNormalized => _rigidbody2D.linearVelocity.normalized;
         public Vector3 Position => transform.position;
         public float Spped =>  _rigidbody2D.linearVelocity.magnitude;

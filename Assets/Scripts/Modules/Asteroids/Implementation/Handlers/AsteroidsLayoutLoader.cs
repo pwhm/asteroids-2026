@@ -19,6 +19,8 @@ namespace Modules.Asteroids.Implementation.Handlers
             _context = context;
         }
         
+        public int AvailableLayoutsCount => _layoutPrefabs.Count;
+        
         public async Task InitializeAsync()
         {
             await LoadLayouts();

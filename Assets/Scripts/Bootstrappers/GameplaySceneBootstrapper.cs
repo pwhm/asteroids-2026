@@ -26,7 +26,7 @@ namespace Bootstrappers
             
             
             // Move to gameplay service later
-            Services.GetService<IGameplayService>().StartRound();
+            Services.GetService<IGameplayService>().StartSession();
         }
     }
 }

@@ -30,6 +30,8 @@ namespace Modules.Asteroids.Implementation
 
             await _layoutLoader.InitializeAsync();
             await Spawner.InitializeAsync();
+
+            AsteroidCollided += _collisionHandler.ResolveCollision;
         }
 
         public void Dispose()
@@ -37,9 +39,9 @@ namespace Modules.Asteroids.Implementation
             Spawner?.Dispose();
         }
 
-        public void SetupForNewRound(int layoutIndex)
+        public void SetupForNewRound(int roundNumber)
         {
-            _layoutLoader.PrepareAsteroidsLayout(layoutIndex);
+            _layoutLoader.PrepareAsteroidsLayout(roundNumber % _layoutLoader.AvailableLayoutsCount % 2);
         }
 
         public void StartRound()

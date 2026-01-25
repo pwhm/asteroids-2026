@@ -1,10 +1,8 @@
-using System.Threading.Tasks;
 using Core.Services;
-using Modules.User;
 
-namespace Modules.Progression
+namespace Modules.User
 {
-    public interface IProgressionService : IService, IUserProgressionService, IUserRoundStateService
+    public interface IUserService : IService, IUserProgressionService, IUserSessionStateService
     {
     }
 }

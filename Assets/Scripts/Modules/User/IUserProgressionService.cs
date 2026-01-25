@@ -1,6 +1,8 @@
+using Core.Services;
+
 namespace Modules.User
 {
-    public interface IUserProgressionService
+    public interface IUserProgressionService : IService
     {
         
     }

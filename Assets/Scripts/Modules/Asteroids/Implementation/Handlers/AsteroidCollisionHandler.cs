@@ -12,7 +12,7 @@ namespace Modules.Asteroids.Implementation.Handlers
             _context.AsteroidCollided += ResolveCollision;
         }
 
-        private void ResolveCollision(AsteroidController asteroid)
+        public void ResolveCollision(AsteroidController asteroid)
         {
             Events.Gameplay.AsteroidDestroyed?.Invoke();
             

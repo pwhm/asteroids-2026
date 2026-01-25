@@ -21,8 +21,8 @@ namespace Modules.Asteroids.Implementation.Handlers
         private ObjectPool<AsteroidController> _largeAsteroidPool;
         private ObjectPool<AsteroidController> _mediumAsteroidPool;
         private ObjectPool<AsteroidController> _smallAsteroidPool;
-        
-        private List<AsteroidController> _activeAsteroids;
+
+        private List<AsteroidController> _activeAsteroids = new();
         
         public AsteroidsSpawner(IAsteroidsServiceContext context)
         {
@@ -71,6 +71,10 @@ namespace Modules.Asteroids.Implementation.Handlers
 
         public void ReleaseAsteroid(AsteroidController asteroid)
         {
+            if (!_activeAsteroids.Contains(asteroid))
+            {
+                return;
+            }
             _activeAsteroids.Remove(asteroid);
             switch (asteroid.Type)
             {
@@ -86,10 +90,11 @@ namespace Modules.Asteroids.Implementation.Handlers
                 default:
                     throw new ArgumentOutOfRangeException(nameof(asteroid.Type), asteroid.Type, null);
             }
+            Events.Gameplay.AsteroidDestroyed?.Invoke();
 
             if (_activeAsteroids.Count == 0)
             {
-                Events.Gameplay.AsteroidDestroyed?.Invoke();
+                Events.Gameplay.RoundCompleted?.Invoke();
             }
         }
         
@@ -112,18 +117,18 @@ namespace Modules.Asteroids.Implementation.Handlers
         {
             _largeAsteroidPool = new ObjectPool<AsteroidController>(
                 () => AsteroidCreate(AsteroidType.Large),
-                AsteroidGet,
-                AsteroidRelease);
+                OnAsteroidGet,
+                OnAsteroidRelease);
             
             _mediumAsteroidPool= new ObjectPool<AsteroidController>(
                 () => AsteroidCreate(AsteroidType.Medium),
-                AsteroidGet,
-                AsteroidRelease);
+                OnAsteroidGet,
+                OnAsteroidRelease);
             
             _smallAsteroidPool = new ObjectPool<AsteroidController>(
                 () => AsteroidCreate(AsteroidType.Small),
-                AsteroidGet,
-                AsteroidRelease);
+                OnAsteroidGet,
+                OnAsteroidRelease);
         }
         
         private AsteroidController AsteroidCreate(AsteroidType asteroidType)
@@ -135,13 +140,13 @@ namespace Modules.Asteroids.Implementation.Handlers
             return instance;
         }
 
-        private void AsteroidGet(AsteroidController asteroid)
+        private void OnAsteroidGet(AsteroidController asteroid)
         {
             asteroid.gameObject.SetActive(true);
             asteroid.Collided += _context.AsteroidCollided;
         }
         
-        private void AsteroidRelease(AsteroidController asteroid)
+        private void OnAsteroidRelease(AsteroidController asteroid)
         {
             asteroid.gameObject.SetActive(false);
             

@@ -5,7 +5,7 @@ namespace Modules.Asteroids
 {
     public interface IAsteroidsService : IService, IDisposable
     {
-        void SetupForNewRound(int layoutIndex);
+        void SetupForNewRound(int roundNumber);
         void StartRound();
     }
 }
