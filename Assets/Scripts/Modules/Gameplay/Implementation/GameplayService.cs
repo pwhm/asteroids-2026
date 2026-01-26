@@ -29,6 +29,7 @@ namespace Modules.Gameplay.Implementation
         public void StartSession()
         {
             _sessionStateService.StartNewSession();
+            
             StartRound();
         }
 
@@ -37,7 +38,6 @@ namespace Modules.Gameplay.Implementation
             var roundNumber = _sessionStateService.Session.RoundNumber;
             Debug.Log($"#Gameplay# Starting round {roundNumber}");
             
-            _sessionStateService.StartNewSession();
             _playerService.SetupForNewRound();
             _asteroidsService.SetupForNewRound(roundNumber);
             
@@ -56,7 +56,10 @@ namespace Modules.Gameplay.Implementation
         {
             _sessionStateService.Session.DeductLife();
             Events.Gameplay.PlayerLostLife?.Invoke();
-            // Update UI
+            if (_sessionStateService.Session.Lives <= 0)
+            {
+                Events.Gameplay.GameOver?.Invoke();
+            }
         }
     }
 }
