@@ -9,6 +9,7 @@ namespace Modules.User.Implementation
         
         Lives = 10,
     }
+    
     internal sealed class RoundState
     {
         public Dictionary<RoundStateProperty, int> Properties = new();
@@ -30,5 +31,6 @@ namespace Modules.User.Implementation
         {
             Properties[RoundStateProperty.Score] += points;
         }
+        
     }
 }

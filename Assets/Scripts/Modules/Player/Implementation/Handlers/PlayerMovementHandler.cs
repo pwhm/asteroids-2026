@@ -1,6 +1,5 @@
 using Modules.Common;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Modules.Player.Implementation.Handlers
 {

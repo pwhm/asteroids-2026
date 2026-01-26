@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Core.Services;
 using Modules.Assets;
@@ -7,7 +6,7 @@ using UnityEngine;
 
 namespace Bootstrappers
 {
-    internal abstract class SceneBootstrapperBase : MonoBehaviour
+    public abstract class SceneBootstrapperBase : MonoBehaviour
     {
         private async void Awake()
         {

@@ -8,7 +8,7 @@ namespace Modules.Asteroids.Implementation
     [RequireComponent(typeof(Rigidbody2D))]
     internal sealed class AsteroidController : MonoBehaviour
     {
-        public event Action<AsteroidController> Collided;
+        public event Action<AsteroidController, string> Collided;
         
         [field:SerializeField] public AsteroidType Type { get; private set; }
 
@@ -41,7 +41,7 @@ namespace Modules.Asteroids.Implementation
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            Collided?.Invoke(this);
+            Collided?.Invoke(this, other.tag);
         }
     }
 }

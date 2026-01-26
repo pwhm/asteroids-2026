@@ -5,15 +5,21 @@ namespace Modules.User.Implementation.Handlers
         private RoundState _state;
 
         public int RoundNumber => _state.Properties[RoundStateProperty.Round];
+        public int Lives => _state.Properties[RoundStateProperty.Lives];
 
         public void StartNewRound()
         {
-            _state.IncrementRoundCounter();
+            _state.Properties[RoundStateProperty.Round] += 1;
         }
 
         public void AddPoints(int points)
         {
-            _state.AddPoints(points);
+            _state.Properties[RoundStateProperty.Score] += points;
+        }
+
+        public void DeductLife()
+        {
+            _state.Properties[RoundStateProperty.Lives] -= 1;
         }
 
         internal void StartNewSession()

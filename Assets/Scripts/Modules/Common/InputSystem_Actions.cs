@@ -214,7 +214,7 @@ namespace Modules.Common
             ]
         },
         {
-            ""name"": ""MainMenu"",
+            ""name"": ""UI"",
             ""id"": ""5dd3595d-7f51-4278-ae5a-e493cdc1ff0b"",
             ""actions"": [
                 {
@@ -231,7 +231,7 @@ namespace Modules.Common
                 {
                     ""name"": """",
                     ""id"": ""1c51908e-edb0-4d25-9476-a79cfae56611"",
-                    ""path"": ""<Keyboard>/anyKey"",
+                    ""path"": ""<Keyboard>/enter"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -310,15 +310,15 @@ namespace Modules.Common
             m_Player_1_Thrust = m_Player_1.FindAction("Thrust", throwIfNotFound: true);
             m_Player_1_Rotation = m_Player_1.FindAction("Rotation", throwIfNotFound: true);
             m_Player_1_Fire = m_Player_1.FindAction("Fire", throwIfNotFound: true);
-            // MainMenu
-            m_MainMenu = asset.FindActionMap("MainMenu", throwIfNotFound: true);
-            m_MainMenu_Continue = m_MainMenu.FindAction("Continue", throwIfNotFound: true);
+            // UI
+            m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+            m_UI_Continue = m_UI.FindAction("Continue", throwIfNotFound: true);
         }
 
         ~@InputSystem_Actions()
         {
             UnityEngine.Debug.Assert(!m_Player_1.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Player_1.Disable() has not been called.");
-            UnityEngine.Debug.Assert(!m_MainMenu.enabled, "This will cause a leak and performance issues, InputSystem_Actions.MainMenu.Disable() has not been called.");
+            UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputSystem_Actions.UI.Disable() has not been called.");
         }
 
         /// <summary>
@@ -509,29 +509,29 @@ namespace Modules.Common
         /// </summary>
         public Player_1Actions @Player_1 => new Player_1Actions(this);
 
-        // MainMenu
-        private readonly InputActionMap m_MainMenu;
-        private List<IMainMenuActions> m_MainMenuActionsCallbackInterfaces = new List<IMainMenuActions>();
-        private readonly InputAction m_MainMenu_Continue;
+        // UI
+        private readonly InputActionMap m_UI;
+        private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+        private readonly InputAction m_UI_Continue;
         /// <summary>
-        /// Provides access to input actions defined in input action map "MainMenu".
+        /// Provides access to input actions defined in input action map "UI".
         /// </summary>
-        public struct MainMenuActions
+        public struct UIActions
         {
             private @InputSystem_Actions m_Wrapper;
 
             /// <summary>
             /// Construct a new instance of the input action map wrapper class.
             /// </summary>
-            public MainMenuActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
+            public UIActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
             /// <summary>
-            /// Provides access to the underlying input action "MainMenu/Continue".
+            /// Provides access to the underlying input action "UI/Continue".
             /// </summary>
-            public InputAction @Continue => m_Wrapper.m_MainMenu_Continue;
+            public InputAction @Continue => m_Wrapper.m_UI_Continue;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
-            public InputActionMap Get() { return m_Wrapper.m_MainMenu; }
+            public InputActionMap Get() { return m_Wrapper.m_UI; }
             /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
             public void Enable() { Get().Enable(); }
             /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
@@ -539,9 +539,9 @@ namespace Modules.Common
             /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
             public bool enabled => Get().enabled;
             /// <summary>
-            /// Implicitly converts an <see ref="MainMenuActions" /> to an <see ref="InputActionMap" /> instance.
+            /// Implicitly converts an <see ref="UIActions" /> to an <see ref="InputActionMap" /> instance.
             /// </summary>
-            public static implicit operator InputActionMap(MainMenuActions set) { return set.Get(); }
+            public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
             /// <summary>
             /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
             /// </summary>
@@ -549,11 +549,11 @@ namespace Modules.Common
             /// <remarks>
             /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
             /// </remarks>
-            /// <seealso cref="MainMenuActions" />
-            public void AddCallbacks(IMainMenuActions instance)
+            /// <seealso cref="UIActions" />
+            public void AddCallbacks(IUIActions instance)
             {
-                if (instance == null || m_Wrapper.m_MainMenuActionsCallbackInterfaces.Contains(instance)) return;
-                m_Wrapper.m_MainMenuActionsCallbackInterfaces.Add(instance);
+                if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
                 @Continue.started += instance.OnContinue;
                 @Continue.performed += instance.OnContinue;
                 @Continue.canceled += instance.OnContinue;
@@ -565,8 +565,8 @@ namespace Modules.Common
             /// <remarks>
             /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
             /// </remarks>
-            /// <seealso cref="MainMenuActions" />
-            private void UnregisterCallbacks(IMainMenuActions instance)
+            /// <seealso cref="UIActions" />
+            private void UnregisterCallbacks(IUIActions instance)
             {
                 @Continue.started -= instance.OnContinue;
                 @Continue.performed -= instance.OnContinue;
@@ -574,12 +574,12 @@ namespace Modules.Common
             }
 
             /// <summary>
-            /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="MainMenuActions.UnregisterCallbacks(IMainMenuActions)" />.
+            /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="UIActions.UnregisterCallbacks(IUIActions)" />.
             /// </summary>
-            /// <seealso cref="MainMenuActions.UnregisterCallbacks(IMainMenuActions)" />
-            public void RemoveCallbacks(IMainMenuActions instance)
+            /// <seealso cref="UIActions.UnregisterCallbacks(IUIActions)" />
+            public void RemoveCallbacks(IUIActions instance)
             {
-                if (m_Wrapper.m_MainMenuActionsCallbackInterfaces.Remove(instance))
+                if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
                     UnregisterCallbacks(instance);
             }
 
@@ -589,21 +589,21 @@ namespace Modules.Common
             /// <remarks>
             /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
             /// </remarks>
-            /// <seealso cref="MainMenuActions.AddCallbacks(IMainMenuActions)" />
-            /// <seealso cref="MainMenuActions.RemoveCallbacks(IMainMenuActions)" />
-            /// <seealso cref="MainMenuActions.UnregisterCallbacks(IMainMenuActions)" />
-            public void SetCallbacks(IMainMenuActions instance)
+            /// <seealso cref="UIActions.AddCallbacks(IUIActions)" />
+            /// <seealso cref="UIActions.RemoveCallbacks(IUIActions)" />
+            /// <seealso cref="UIActions.UnregisterCallbacks(IUIActions)" />
+            public void SetCallbacks(IUIActions instance)
             {
-                foreach (var item in m_Wrapper.m_MainMenuActionsCallbackInterfaces)
+                foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
                     UnregisterCallbacks(item);
-                m_Wrapper.m_MainMenuActionsCallbackInterfaces.Clear();
+                m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
                 AddCallbacks(instance);
             }
         }
         /// <summary>
-        /// Provides a new <see cref="MainMenuActions" /> instance referencing this action map.
+        /// Provides a new <see cref="UIActions" /> instance referencing this action map.
         /// </summary>
-        public MainMenuActions @MainMenu => new MainMenuActions(this);
+        public UIActions @UI => new UIActions(this);
         private int m_KeyboardMouseSchemeIndex = -1;
         /// <summary>
         /// Provides access to the input control scheme.
@@ -699,11 +699,11 @@ namespace Modules.Common
             void OnFire(InputAction.CallbackContext context);
         }
         /// <summary>
-        /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "MainMenu" which allows adding and removing callbacks.
+        /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
         /// </summary>
-        /// <seealso cref="MainMenuActions.AddCallbacks(IMainMenuActions)" />
-        /// <seealso cref="MainMenuActions.RemoveCallbacks(IMainMenuActions)" />
-        public interface IMainMenuActions
+        /// <seealso cref="UIActions.AddCallbacks(IUIActions)" />
+        /// <seealso cref="UIActions.RemoveCallbacks(IUIActions)" />
+        public interface IUIActions
         {
             /// <summary>
             /// Method invoked when associated input action "Continue" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.

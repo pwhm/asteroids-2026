@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1096415552496050348}
   m_Layer: 10
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77,7 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Player.Implementation::Modules.Player.Implementation.PlayerController
   _rigidbody: {fileID: 9098353683853888921}
   _thrustForce: 2
-  _rotationSpeed: 360
+  _rotationSpeed: 5
 --- !u!114 &3698723288801248330
 MonoBehaviour:
   m_ObjectHideFlags: 0
