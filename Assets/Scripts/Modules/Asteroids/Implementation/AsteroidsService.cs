@@ -1,13 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using Core.Services;
-using Modules.Assets;
 using Modules.Asteroids.Implementation.Handlers;
-using Modules.Common;
-using UnityEngine;
-using UnityEngine.Pool;
-using Object = UnityEngine.Object;
 
 namespace Modules.Asteroids.Implementation
 {

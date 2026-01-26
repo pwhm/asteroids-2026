@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Modules.Common;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -39,6 +40,11 @@ namespace Modules.Assets.Implementation
 
         public void ReleaseAssets(string tag)
         {
+            if (!_loadedAssets.ContainsKey(tag))
+            {
+                return;
+            }
+            
             var assets = _loadedAssets[tag];
 
             foreach (var asset in assets)
@@ -47,6 +53,16 @@ namespace Modules.Assets.Implementation
             }
             
             _loadedAssets[tag].Clear();
+        }
+
+        public async Task LoadScene(string name, string tag)
+        {
+            var key = string.Format(Constants.Addressables.SCENE_KEY_FORMAT, name);
+            var handle = Addressables.LoadSceneAsync(key);
+            
+            await handle.Task;
+            
+            _loadedAssets[tag].Add(name, handle);
         }
 
         private void TrackAsset(string tag, string key, AsyncOperationHandle handle)

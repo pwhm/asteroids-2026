@@ -1,7 +1,6 @@
 using Core.Services;
 using Modules.Common;
 using Modules.User;
-using TMPro;
 using UnityEngine;
 
 namespace Modules.Gameplay.Implementation.View

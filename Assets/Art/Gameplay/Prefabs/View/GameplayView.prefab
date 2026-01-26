@@ -495,7 +495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Gameplay.Implementation::Modules.Gameplay.Implementation.View.GameplayView
   _lifeCounter: {fileID: 868983999376827879}
-  _gameOverLabel: {fileID: 2547625282387670025}
+  _gameOverContainer: {fileID: 2364713868645941467}
 --- !u!1001 &938350629545221133
 PrefabInstance:
   m_ObjectHideFlags: 0

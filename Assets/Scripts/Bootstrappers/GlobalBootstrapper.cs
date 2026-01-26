@@ -1,9 +1,7 @@
 using System;
 using System.Threading.Tasks;
-using Core.Services;
 using Modules.Assets.Implementation;
 using Modules.Gameplay.Implementation;
-using Modules.User;
 using Modules.User.Implementation;
 using Random = UnityEngine.Random;
 

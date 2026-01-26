@@ -2,7 +2,8 @@
     "name": "Common",
     "rootNamespace": "",
     "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c"
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:38d1c1a2f634942f28a60c4c8b24a6eb"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

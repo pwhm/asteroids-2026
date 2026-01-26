@@ -1,5 +1,4 @@
 using System;
-using Modules.Common;
 using UnityEngine;
 
 namespace Modules.Player.Implementation

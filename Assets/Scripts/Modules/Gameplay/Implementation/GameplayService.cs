@@ -1,6 +1,6 @@
-using System;
 using System.Threading.Tasks;
 using Core.Services;
+using Modules.Assets;
 using Modules.Asteroids;
 using Modules.Common;
 using Modules.Player;
@@ -11,6 +11,7 @@ namespace Modules.Gameplay.Implementation
 {
     internal sealed class GameplayService : IGameplayService
     {
+        private IAssetService _assetService => Services.GetService<IAssetService>();
         private IPlayerService _playerService => Services.GetService<IPlayerService>();
         private IAsteroidsService _asteroidsService => Services.GetService<IAsteroidsService>();
         private IUserSessionStateService _sessionStateService => Services.GetService<IUserSessionStateService>();
@@ -24,6 +25,7 @@ namespace Modules.Gameplay.Implementation
 
         public void SwitchTo()
         {
+            _assetService.LoadScene(Constants.Scenes.GAMEPLAY, Constants.Addressables.Tags.GAMEPLAY);
         }
 
         public void StartSession()
